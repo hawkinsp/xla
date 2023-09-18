@@ -123,6 +123,30 @@ cc_library(
     ],
 )
 
+
+cc_library(
+    name = "nccl_via_stub",
+    hdrs = ["src/nccl.h"],
+    strip_include_prefix = "src",
+    include_prefix = "third_party/nccl",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@local_config_cuda//cuda:cuda_headers",
+        "@tsl//tsl/cuda:nccl_stub",
+    ],
+)
+
+cc_library(
+    name = "nccl_headers",
+    hdrs = ["src/nccl.h"],
+    strip_include_prefix = "src",
+    include_prefix = "third_party/nccl",
+    visibility = ["//visibility:public"],
+    deps = [
+        "@local_config_cuda//cuda:cuda_headers",
+    ],
+)
+
 alias(
     name = "enqueue",
     actual = select({
